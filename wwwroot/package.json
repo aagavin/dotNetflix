@@ -1,0 +1,15 @@
+{
+  "name": "dotnetflix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material/drawer": "^0.5.9",
+    "material-components-web": "^0.22.0"
+  }
+}
