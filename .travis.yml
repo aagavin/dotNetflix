@@ -13,4 +13,4 @@ deploy:
   provider: gae
   keyfile: service_account.json
   project: comp-306
-  on: production 
+  on: master 
