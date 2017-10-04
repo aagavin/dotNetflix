@@ -1,12 +1,10 @@
-﻿@{ 
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-}
+﻿@{ var controllerName = this.ViewContext.RouteData.Values["controller"].ToString().ToLower(); }
 
 <html class="mdc-typography">
 
 <head>
   <title>dotNetflix - @controllerName</title>
-  <link rel="stylesheet" href="/node_modules/material-components-web/dist/material-components-web.css">
+  <link rel="stylesheet" href="/css/material-components-web.css">
   <link rel="stylesheet" href="/css/main.css">
 </head>
 
@@ -15,7 +13,7 @@
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
         <span class="catalog-back">
-            <a href="/" class="mdc-toolbar__icon--menu"><i class="material-icons">cloud</i></a>
+            <a href="#" class="mdc-toolbar__icon--menu"><i class="material-icons">cloud</i></a>
           </span>
         <span class="mdc-toolbar__title catalog-title">dotNetflix</span>
       </section>
@@ -38,15 +36,15 @@
     <nav class="mdc-permanent-drawer">
       <div class="mdc-list-group">
         <nav class="mdc-list">
-          <a class="mdc-list-item @if (controllerName == "Home"){ @("mdc-permanent-drawer--selected") }" href="/">
+          <a class="mdc-list-item @if (controllerName == "home"){ @("mdc-permanent-drawer--selected ") }" href="/">
               <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>
               Home
             </a>
-          <a class="mdc-list-item @if (controllerName == "upload"){ @("mdc-permanent-drawer--selected") }" href="/upload">
+          <a class="mdc-list-item @if (controllerName == "upload"){ @("mdc-permanent-drawer--selected ") }" href="/upload">
 
               <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">file_upload</i>Upload
             </a>
-          <a class="mdc-list-item @if (controllerName == "video"){ @("mdc-permanent-drawer--selected") }" href="/video">
+          <a class="mdc-list-item @if (controllerName == "video"){ @("mdc-permanent-drawer--selected ") }" href="/video">
               <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">view_module</i>Videos
             </a>
         </nav>
@@ -59,11 +57,21 @@
     </main>
   </div>
 
-  <script src="/node_modules/material-components-web/dist/material-components-web.js"></script>
-  <script>
+  <script src="/js/material-components-web.min.js"></script>
+  <script type="text/javascript">
     mdc.autoInit()
   </script>
   <script type="text/javascript">
+    // set js on input text
+    (function () {
+      var tfs = document.querySelectorAll(
+        '.mdc-textfield:not([data-demo-no-auto-js])'
+      );
+      for (var i = 0, tf; tf = tfs[i]; i++) {
+        mdc.textfield.MDCTextfield.attachTo(tf);
+      }
+    })();
+    // set toggle of menu
     var menuEl = document.querySelector('#account-menu');
     var menu = new mdc.menu.MDCSimpleMenu(menuEl);
     var toggle = document.querySelector('.toggle');
