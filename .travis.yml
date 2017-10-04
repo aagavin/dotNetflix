@@ -1,0 +1,16 @@
+language: csharp
+dotnet: 2.0.0
+mono: none
+dist: trusty
+script:
+ - dotnet restore
+ - dotnet publish -c Release
+ - cd bin/Release/netcoreapp2.0/publish/
+before_install:
+- openssl aes-256-cbc -K $encrypted_0b1d599a646e_key -iv $encrypted_0b1d599a646e_iv
+  -in service_account.json.enc -out service_account.json -d
+deploy:
+  provider: gae
+  keyfile: service_account.json
+  project: comp-306
+  on: production 
