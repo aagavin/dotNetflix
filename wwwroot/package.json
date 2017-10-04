@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@material/drawer": "^0.5.9",
     "material-components-web": "^0.22.0"
   }
 }
