@@ -1,8 +1,13 @@
-﻿@{ var controllerName = this.ViewContext.RouteData.Values["controller"].ToString().ToLower(); }
+﻿@{
+  var controllerName = this.ViewContext.RouteData.Values["controller"].ToString().ToLower();
+  
+ }
 
-<html class="mdc-typography">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8" />
   <title>dotNetflix - @controllerName</title>
   <link rel="stylesheet" href="/css/material-components-web.css">
   <link rel="stylesheet" href="/css/main.css">
@@ -18,12 +23,22 @@
         <span class="mdc-toolbar__title catalog-title">dotNetflix</span>
       </section>
       <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-        <a href="#" class="material-icons mdc-toolbar__icon toggle" aria-label="More" alt="More">account_circle</a>
+        @if (User.Identity.IsAuthenticated) {
+          <a href="#" class="material-icons mdc-toolbar__icon toggle" aria-label="More" alt="More">lock</a>
+        }
+        else{
+          <a href="#" class="material-icons mdc-toolbar__icon toggle" aria-label="More" alt="More">account_circle</a>
+        }
         <div class="mdc-menu-anchor">
           <div class="mdc-simple-menu" tabindex="-1" id="account-menu">
             <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
               <li><a href="/account" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">Account</a></li>
-              <li><a href="/account/signin" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;">Sign In</a></li>
+              @if (User.Identity.IsAuthenticated) {
+                <li><a href="/account/logout" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;">Sign Out</a></li>
+              }
+              else{
+                <li><a href="/account/signin" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;">Sign In</a></li>
+              }
               <li class="mdc-list-divider" role="separator"></li>
             </ul>
           </div>
