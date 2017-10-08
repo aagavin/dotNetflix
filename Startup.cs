@@ -29,6 +29,7 @@ namespace dotNetflix
 			.AddCookie("Cookies", options => {
 				options.LoginPath = "/account/signin";
 				options.AccessDeniedPath = "/account/signin";
+				options.LogoutPath = "/account/Logout";
 			});
 
 			// claims transformation
