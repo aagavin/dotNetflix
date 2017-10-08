@@ -3,6 +3,7 @@
   <section class="mdc-card__primary">
     <h1 class="mdc-card__title mdc-card__title--large">Sign into your account</h1>
     <h2 class="mdc-card__subtitle">Signing in allows you to upload videos</h2>
+		<h2>@ViewData["Message"]</h2>
   </section>
   <section class="mdc-card__supporting-text">
 
@@ -23,7 +24,13 @@
 							</div>
 						</div>	
 						<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-							<button class="mdc-button mdc-button--compact mdc-card__action mdc-button--raised">Sign In</button>
+							<div class="mdc-textfield">
+								<input type="password" id="password-text-verify" class="mdc-textfield__input" required minlength=8 name="passwordverify">
+								<label class="mdc-textfield__label" for="password-text-verify">Password verify</label>
+							</div>
+						</div>	
+						<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+							<button class="mdc-button mdc-button--compact mdc-card__action mdc-button--raised">Create Account</button>
 						</div>	
 					</div>
 				</div>
@@ -31,6 +38,6 @@
 		
   </section>
   <section class="mdc-card__actions">
-		<p>Don't have an account? <a href="/account/create" >Create Account</a></p>
+		<p>Already have an account? <a href="/account/signin" >Create Account</a></p>
   </section>
 </div>
