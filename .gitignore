@@ -4,7 +4,7 @@ project.lock.json
 .DS_Store
 *.pyc
 node_modules
-service_account.json
+COMP-306.json
 
 # Visual Studio Code
 .vscode
