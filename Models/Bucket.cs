@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Google.Cloud.Storage.V1;
 
 namespace dotNetflix.Models
@@ -23,13 +25,12 @@ namespace dotNetflix.Models
 		}
 
 
-		public string UpdateFile(string fileName, string fileType, System.IO.MemoryStream file)
+		public async Task<string> UpdateFile(string fileName, string fileType, Stream file)
 		{
 
 			try
 			{
-
-				var obj1 = this._storage.UploadObject("comp-306.appspot.com", fileName, fileType, file, new UploadObjectOptions()
+				var obj1 = await this._storage.UploadObjectAsync("comp-306.appspot.com", fileName, fileType, file, new UploadObjectOptions()
 				{
 					PredefinedAcl = PredefinedObjectAcl.PublicRead
 				});
@@ -43,7 +44,6 @@ namespace dotNetflix.Models
 			}
 
 		}
-
 
 	}
 
