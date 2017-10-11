@@ -76,3 +76,8 @@ html {
 #extra-tall-content {
 	height: 200vh;
 }
+
+.mdc-card {
+	margin-top: 1%;
+  width: 98%;
+}
