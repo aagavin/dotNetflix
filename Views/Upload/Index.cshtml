@@ -1,1 +1,17 @@
-<h1>Upload index</h1>
+<h1>Upload a video</h1>
+
+<form method="POST" enctype="multipart/form-data" >		
+	<div class="mdc-layout-grid">
+		<div class="mdc-layout-grid__inner">
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<label for="input">Select file</label>
+			</div>
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<input type="file" id="input" required name="file">
+			</div>	
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<button class="mdc-button mdc-button--compact mdc-card__action mdc-button--raised">Upload</button>
+			</div>	
+		</div>
+	</div>
+</form>
