@@ -21,18 +21,23 @@ namespace dotNetflix.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromForm] IFormFile file){
+        public async Task<IActionResult> Index([FromForm] IFormFile file)
+        {
+            if (file.ContentType.Equals("video/mp4"))
+            {
+                BucketAccess bucket = new BucketAccess();
+                string url = await bucket.UpdateFile(file.FileName, file.ContentType, file.OpenReadStream());
+                return RedirectToAction("Select", new {url=url});                
+            }
 
-            // BucketAccess bucket = new BucketAccess();
-            System.Console.WriteLine("*****************");
-            System.Console.WriteLine(file.FileName);
-            System.Console.WriteLine(file.ContentType);
-            System.Console.WriteLine("*****************");
-            return RedirectToAction("Select");
+            ViewData["Message"] = "File not correct type mp4 files only";
+            return View();
+
         }
 
-        public string Select(){
-            return "You are here";
+        public IActionResult Select(string url){
+            ViewData["url"] = url;
+            return View();
         }
 
 

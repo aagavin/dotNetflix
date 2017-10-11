@@ -93,6 +93,10 @@
     toggle.addEventListener('click', function () {
       menu.open = !menu.open;
     });
+
+    // set ripple effect 
+    mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+    mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-list-item'));
   </script>
   </div>
 </body>
