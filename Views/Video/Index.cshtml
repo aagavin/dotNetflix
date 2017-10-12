@@ -1,1 +1,11 @@
 <h1>Video index</h1>
+
+@foreach (var video in (dynamic)@ViewData["Videos"])
+{
+    <h1>Name: @video.Name</h1>
+    <video src="@video.bucketurl" controls>
+        Your browser doesnt support video
+    </video>
+    <p>Url: <a href="@video.bucketurl">download</a></p>
+
+}
