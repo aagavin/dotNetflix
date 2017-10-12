@@ -30,7 +30,7 @@ namespace dotNetflix.Models
 
 			try
 			{
-				var obj1 = await this._storage.UploadObjectAsync("comp-306.appspot.com", fileName.Split('.')[0] +"/"+fileName, fileType, file, new UploadObjectOptions()
+				var obj1 = await this._storage.UploadObjectAsync("comp-306.appspot.com", fileName, fileType, file, new UploadObjectOptions()
 				{
 					PredefinedAcl = PredefinedObjectAcl.PublicRead
 				});

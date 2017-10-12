@@ -8,7 +8,7 @@ namespace dotNetflix.Models
 
 		public int Userid { get; set; }
 		public string Username { get; set; }
-		public string Password { get; set; }
+		public byte[] Password { get; set; }
 		public virtual ICollection<Videos> Videos { get; set; }
 		public virtual ICollection<Comments> Comments { get; set; }
 	}
@@ -17,6 +17,7 @@ namespace dotNetflix.Models
 	{
 		public int Videoid { get; set; }
 		public virtual Users User { get; set; }
+		public string Name { get; set; }
 		public int views { get; set; }
 		public string bucketurl { get; set; }
 		public virtual ICollection<Comments> Comments { get; set; }
