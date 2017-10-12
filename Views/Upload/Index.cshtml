@@ -1,1 +1,24 @@
-<h1>Upload index</h1>
+<h1>Upload a video</h1>
+<p>@ViewData["Message"]</p>
+<form method="POST" enctype="multipart/form-data">
+	<div class="mdc-layout-grid">
+		<div class="mdc-layout-grid__inner">
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<div class="mdc-textfield">
+					<input type="text" id="text" class="mdc-textfield__input" name="name" required>
+					<label class="mdc-textfield__label" for="username-text">Video Name</label>
+					<div class="mdc-textfield__bottom-line"></div>
+				</div>
+			</div>
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<label for="input">Select file</label>
+			</div>
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<input type="file" id="input" required name="file">
+			</div>
+			<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+				<button class="mdc-button mdc-button--compact mdc-card__action mdc-button--raised">Upload</button>
+			</div>
+		</div>
+	</div>
+</form>

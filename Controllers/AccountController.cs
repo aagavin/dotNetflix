@@ -38,6 +38,13 @@ namespace dotNetflix.Controllers
 				context.Database.EnsureCreated();
 
 				Users user = context.Users.Where(u => u.Username == username).FirstOrDefault();
+
+				PasswordHash passwordHash = new PasswordHash(user.Password);
+
+				if(!passwordHash.Verify(password)){
+					return Redirect("/account/signin");
+				}
+
 				var claims = new List<Claim>{
 						new Claim("id", user.Userid.ToString()),
 						new Claim("name", user.Username),
@@ -97,7 +104,7 @@ namespace dotNetflix.Controllers
 
 				Users user = new Users();
 				user.Username = username;
-				user.Password = System.Text.Encoding.UTF8.GetString(passwordHash.ToArray());
+				user.Password = passwordHash.ToArray();
 				context.Users.Add(user);
 				context.SaveChanges();
 			}

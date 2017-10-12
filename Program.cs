@@ -16,11 +16,13 @@ namespace dotNetflix
     {
         public static void Main(string[] args)
         {
+            BucketAccess bucket = new BucketAccess();
             using(var context = new DbSqlContext()){
                 context.Database.EnsureCreated();
                 
             }
             BuildWebHost(args).Run();
+            
         }
 
 
