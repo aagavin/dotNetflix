@@ -14,6 +14,12 @@ namespace dotNetflix.Controllers
     {
         public IActionResult Index()
         {
+            using(var context = new DbSqlContext()){
+                context.Database.EnsureCreated();
+
+                ViewData["Videos"] = context.Videos.ToArray();
+            }
+
             return View();
         }
 
