@@ -19,15 +19,9 @@ namespace dotNetflix.Controllers
                 context.Database.EnsureCreated();
 
                 List<Videos> videos =context.Videos.ToList();
-                foreach (Videos video in videos)
-                {
-                    System.Console.WriteLine("**********************************");
-                    System.Console.WriteLine(video.User.Userid);
-                    System.Console.WriteLine(video.Name);
-                    System.Console.WriteLine(video.bucketurl);
-                    System.Console.WriteLine("**********************************");
-                }
+                ViewData["Videos"] = context.Videos.ToArray();
             }
+
             return View();
         }
 
