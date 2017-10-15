@@ -1,7 +1,7 @@
 <div class="mdc-card">
   <section class="mdc-card__primary">
 		<h1 class="mdc-card__title mdc-card__title--large mdc-typography--display3" style="text-align: center;">@ViewData["Name"]</h1>
-    <small class="mdc-card__subtitle">@ViewData["Views"] views</small>
+    <small class="mdc-card__subtitle">@ViewData["Views"] views | Uploaded by: @ViewData["User"]</small>
   </section>
   <section class="mdc-card__supporting-text">
     <video controls src="@ViewData["bucketurl"]" style="width:70%;margin-left:auto;margin-right:auto;">
@@ -12,12 +12,15 @@
     <a href="@ViewData["bucketurl"]" class="mdc-button mdc-button--compact mdc-card__action">Download Video</a>
   </section>
   <section class="mdc-card__supporting-text">
-		<div class="mdc-textfield mdc-textfield--multiline">
-			<textarea class="mdc-textfield__input" id="css-only-multiline" rows="8" cols="40" placeholder="Add your comment here"></textarea>
-		</div>
-		<br>
-		<button class="mdc-button mdc-button--raised">
-  		Save Comment
-		</button>
+		<form action="/video/AddComment" method="POST">
+			<div class="mdc-textfield mdc-textfield--multiline">
+				<textarea class="mdc-textfield__input" id="css-only-multiline" rows="4" cols="40" placeholder="Add your comment here" name="comment"></textarea>
+			</div>
+			<br>
+			<input type="hidden" name="videoId" value="@ViewData["Id"]" />
+			<button class="mdc-button mdc-card__action mdc-button--raised mdc-ripple-upgraded" type="submit">
+				Save Comment
+			</button>
+		</form>
   </section>
 </div>
