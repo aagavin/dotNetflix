@@ -1,11 +1,25 @@
 <h1>Video index</h1>
 
-@foreach (var video in (dynamic)@ViewData["Videos"])
-{
-    <h1>Name: @video.Name</h1>
-    <video src="@video.bucketurl" controls>
-        Your browser doesnt support video
-    </video>
-    <p>Url: <a href="@video.bucketurl">download</a></p>
+<div class="mdc-grid-list">
+    <ul class="mdc-grid-list__tiles">
+        @foreach (var video in (dynamic)@ViewData["Videos"])
+        {
+            <a href="/video/id/@video.Videoid">
+            <li class="mdc-grid-tile">
+                <div class="mdc-grid-tile__primary">
+                    
+                        <video src="@video.bucketurl" style="width:100%;margin-top:auto;margin-bottom:auto">Your browser doesnt support HTML5 video</video>
+                </div>
+                <span class="mdc-grid-tile__secondary">
+                    <span class="mdc-grid-tile__title">
+                        @video.Name 
+                    </span>
+                </span>
+            </li>
+            </a>
 
-}
+        }
+    </ul>
+</div>
+
+@* <!-- <a href="@video.bucketurl"><i class="material-icons">file_download</i></a> --> *@
