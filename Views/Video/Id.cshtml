@@ -1,0 +1,23 @@
+<div class="mdc-card">
+  <section class="mdc-card__primary">
+		<h1 class="mdc-card__title mdc-card__title--large mdc-typography--display3" style="text-align: center;">@ViewData["Name"]</h1>
+    <small class="mdc-card__subtitle">@ViewData["Views"] views</small>
+  </section>
+  <section class="mdc-card__supporting-text">
+    <video controls src="@ViewData["bucketurl"]" style="width:70%;margin-left:auto;margin-right:auto;">
+			Your browser doesn't support 
+		</video>
+  </section>
+	<section class="mdc-card__actions">
+    <a href="@ViewData["bucketurl"]" class="mdc-button mdc-button--compact mdc-card__action">Download Video</a>
+  </section>
+  <section class="mdc-card__supporting-text">
+		<div class="mdc-textfield mdc-textfield--multiline">
+			<textarea class="mdc-textfield__input" id="css-only-multiline" rows="8" cols="40" placeholder="Add your comment here"></textarea>
+		</div>
+		<br>
+		<button class="mdc-button mdc-button--raised">
+  		Save Comment
+		</button>
+  </section>
+</div>
