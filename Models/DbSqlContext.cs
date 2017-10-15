@@ -13,8 +13,8 @@ namespace dotNetflix.Models
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			// optionsBuilder.UseMySql(@"server=35.186.176.236;database=mydotdb;user=web;password=password;");
-			optionsBuilder.UseMySql(@"server=localhost;database=mydotdb;user=root;password=admin;");
+			optionsBuilder.UseMySql(@"server=35.186.176.236;database=mydotdb;user=web;password=password;");
+			// optionsBuilder.UseMySql(@"server=localhost;database=mydotdb;user=root;password=admin;");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
