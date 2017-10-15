@@ -41,7 +41,7 @@ namespace dotNetflix.Controllers
 
 				using (var context = new DbSqlContext())
 				{
-					Users user = context.Users.Where(u => u.Userid == userId).FirstOrDefault();
+					Users user = context.Users.Find(userId); //
 					context.Database.EnsureCreated();
 					Videos video = new Videos();
 					video.Name = name;
