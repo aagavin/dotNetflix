@@ -1,0 +1,38 @@
+<div class="mdc-card">
+  <section class="mdc-card__primary">
+		<h1 class="mdc-card__title mdc-card__title--large mdc-typography--display3" style="text-align: center;">@ViewData["Name"]</h1>
+    <small class="mdc-card__subtitle">@ViewData["Views"] views | Uploaded by: @ViewData["User"]</small>
+  </section>
+  <section class="mdc-card__supporting-text">
+    <video controls src="@ViewData["bucketurl"]" style="width:70%;margin-left:auto;margin-right:auto;">
+			Your browser doesn't support 
+		</video>
+  </section>
+	<section class="mdc-card__actions">
+    <a href="@ViewData["bucketurl"]" class="mdc-button mdc-button--compact mdc-card__action">Download Video</a>
+  </section>
+  <section class="mdc-card__supporting-text">
+		<form action="/video/AddComment" method="POST">
+			<div class="mdc-textfield mdc-textfield--multiline">
+				<textarea class="mdc-textfield__input" id="css-only-multiline" rows="1" cols="25" placeholder="Add your comment here" name="comment" required></textarea>
+			</div>
+			<br>
+			<input type="hidden" name="videoId" value="@ViewData["Id"]" />
+			<button class="mdc-button mdc-card__action mdc-button--raised mdc-ripple-upgraded" type="submit">
+				Save Comment
+			</button>
+		</form>
+  </section>
+	<section class="mdc-card__supporting-text">
+		@foreach(var comment in ViewData["Comments"] as IEnumerable<dotNetflix.Models.Comment>){
+
+			<div class="mdc-card">
+				<section class="mdc-card__primary">
+					<h1 class="mdc-card__title mdc-card__title--large">@comment.UserComment</h1>
+					<h2 class="mdc-card__subtitle">comment by: @comment.User.Username</h2>
+				</section>
+			</div>
+
+		}
+	</section>
+</div>
