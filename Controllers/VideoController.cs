@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using dotNetflix.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace dotNetflix.Controllers
 {
@@ -27,8 +28,10 @@ namespace dotNetflix.Controllers
             using (var context = new DbSqlContext())
             {
                 context.Database.EnsureCreated();
-                var video = context.Videos.Include(v => v.User)
-                .Single(v => v.Videoid == id);
+                var video = context.Videos
+                    .Include(v => v.User)
+                    .Include(v => v.Comments)
+                    .Single(v => v.Videoid == id);
 
                 video.views++;
 
@@ -44,8 +47,27 @@ namespace dotNetflix.Controllers
         }
 
         [HttpPost]
-        public String AddComment([FromForm] string comment, [FromForm] int videoId){
-            return $"{comment} {videoId}";
+        public IActionResult AddComment([FromForm] string comment, [FromForm] int videoId){
+
+            using(var context = new DbSqlContext())
+            {
+                context.Database.EnsureCreated();
+
+                var user = context.Users.Find(int.Parse(this.User.Claims.FirstOrDefault().Value));
+                var video = context.Videos.Find(videoId);
+
+                Comment newComment = new Comment{
+                    User = user,
+                    UserComment = comment,
+                    Video = video,
+                };
+
+                context.Add(newComment);
+                context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Id");
         }
 
     }
