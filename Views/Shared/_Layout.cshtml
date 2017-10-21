@@ -24,7 +24,7 @@
       </section>
       <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
         @if (User.Identity.IsAuthenticated) {
-          <a href="#" class="material-icons mdc-toolbar__icon toggle" aria-label="More" alt="More">lock</a>
+          <a href="#" class="mdc-toolbar__icon toggle" aria-label="More" alt="More"><img src="http://identicon.org?t=@User.Identity.Name&s=25" /></a>
         }
         else{
           <a href="#" class="material-icons mdc-toolbar__icon toggle" aria-label="More" alt="More">account_circle</a>
