@@ -27,14 +27,14 @@ namespace dotNetflix.Controllers
             using (var context = new DbSqlContext())
             {
                 context.Database.EnsureCreated();
-                Videos video = context.Videos.Find(id);
+                var video = context.Videos.Include(v => v.User)
+                .Single(v => v.Videoid == id);
+
                 video.views++;
-                System.Console.WriteLine("***********************");
-                System.Console.WriteLine(video.User.Userid);
-                System.Console.WriteLine("***********************");
+
                 ViewData["Id"] = video.Videoid;
                 ViewData["Name"] = video.Name;
-                ViewData["User"] = (video.User).Username;
+                ViewData["User"] = video.User.Username;
                 ViewData["Views"] = video.views;
                 ViewData["bucketurl"] = video.bucketurl;
                 ViewData["Comments"] = video.Comments;

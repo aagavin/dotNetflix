@@ -41,12 +41,14 @@ namespace dotNetflix.Controllers
 
 				using (var context = new DbSqlContext())
 				{
-					Users user = context.Users.Find(userId); //
+					User user = context.Users.Find(userId); //
 					context.Database.EnsureCreated();
-					Videos video = new Videos();
-					video.Name = name;
-					video.bucketurl = url;
-					video.User = user;
+					Video video = new Video{
+						Name = name,
+						bucketurl = url,
+						User = user,
+
+					};
 					context.Videos.Add(video);
 					context.SaveChanges();
 				}

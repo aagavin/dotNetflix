@@ -1,32 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotNetflix.Models
 {
-	public class Users
+	public class User
 	{
-
+		[Key]
 		public int Userid { get; set; }
 		public string Username { get; set; }
 		public byte[] Password { get; set; }
-		public virtual ICollection<Videos> Videos { get; set; }
-		public virtual ICollection<Comments> Comments { get; set; }
+
 	}
 
-	public class Videos
+	public class Video
 	{
+		[Key]
 		public int Videoid { get; set; }
-		public virtual Users User { get; set; }
+		public User User { get; set; }	
 		public string Name { get; set; }
 		public int views { get; set; }
 		public string bucketurl { get; set; }
-		public virtual ICollection<Comments> Comments { get; set; }
+		public ICollection<Comment> Comments { get; set; }
 	}
 
-	public class Comments
+	public class Comment
 	{
-		public int Videoid { get; set; }
-		public int Userid { get; set; }
-		public string Comment { get; set; }
+		[Key]
+		public int Commentid { get; set; }
+		public Video Video { get; set; }
+		public User User { get; set; }
+		public string UserComment { get; set; }
 	}
 }
