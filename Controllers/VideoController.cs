@@ -31,6 +31,7 @@ namespace dotNetflix.Controllers
                 var video = context.Videos
                     .Include(v => v.User)
                     .Include(v => v.Comments)
+                        .ThenInclude(c => c.User)
                     .Single(v => v.Videoid == id);
 
                 video.views++;
@@ -67,7 +68,7 @@ namespace dotNetflix.Controllers
 
             }
 
-            return RedirectToAction("Id");
+            return RedirectToAction("Id", new {id = videoId});
         }
 
     }
