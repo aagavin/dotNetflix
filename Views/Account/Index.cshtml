@@ -1,1 +1,37 @@
-<h1>Account index</h1>
+<h1>Account Settings</h1>
+<div class="mdc-card">
+    <section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large">Your comments</h1>
+        <h2 class="mdc-card__subtitle">Edit or delete any of your comments</h2>
+    </section>
+    <section class="mdc-card__supporting-text">
+        <nav class="mdc-list">
+            @foreach (var comment in @ViewData["Comments"] as IEnumerable<dotNetflix.Models.Comment>)
+            {
+                <form method="POST" action="/account/updateComment">
+                <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <input type="hidden" name="commentId" value="@comment.Commentid" />
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10">
+                        <textarea style="font-size:18px;" class="mdc-textfield__input" id="css-only-multiline" rows="1" cols="25" name="comment" required>@comment.UserComment</textarea>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2">
+                        <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                                <button class="mdc-button"><i class="material-icons">save</i></button>
+                            </div>
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                                <button class="mdc-button"><i class="material-icons"><i class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+                </form>
+            }
+        </nav>
+    </section>
+</div>
