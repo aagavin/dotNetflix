@@ -13,16 +13,16 @@
                 <div class="mdc-layout-grid__inner">
                     <input type="hidden" name="commentId" value="@comment.Commentid" />
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10">
-                        <textarea style="font-size:18px;" class="mdc-textfield__input" id="css-only-multiline" rows="1" cols="25" name="comment" required>@comment.UserComment</textarea>
+                        <textarea style="font-size:18px;" class="mdc-textfield__input" id="css-only-multiline" rows="1" cols="25" name="userComment" required>@comment.UserComment</textarea>
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2">
                         <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                <button class="mdc-button"><i class="material-icons">save</i></button>
+                                <button type="submit" class="mdc-button"><i class="material-icons">save</i></button>
                             </div>
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                <button class="mdc-button"><i class="material-icons"><i class="material-icons">delete</i></button>
+                                <button type="button" value="@comment.Commentid" class="deleteCmtBtn mdc-button"><i class="material-icons"><i class="material-icons">delete</i></button>
                             </div>
                         </div>
                         </div>
@@ -35,3 +35,22 @@
         </nav>
     </section>
 </div>
+
+    <script type="text/javascript">
+        var deleteButtons = document.getElementsByClassName("deleteCmtBtn");
+
+        for(var i =0; i< deleteButtons.length; i++){
+            deleteButtons[i].addEventListener('click', (event)=>{
+                alert(deleteButtons[i].getAttribute("value"));
+            });
+        }
+
+        /** document.getElementById("deleteCmtBtn").addEventListener("click", (event)=>{
+            alert("you clicked me");
+        }); **/
+    </script>
+
+@*
+@section scripts
+{
+*@
