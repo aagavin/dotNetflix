@@ -82,3 +82,16 @@ html {
 	margin-top: 1%;
   width: 98%;
 }
+
+.mdc-grid-tile__primary{
+	overflow-y: hidden;
+}
+
+.mdc-grid-tile{
+	width: var(--mdc-grid-list-tile-width, 283px);
+}
+
+/* .mdc-card__supporting-text video{
+	width: 100%;
+	height: 65%;
+} */

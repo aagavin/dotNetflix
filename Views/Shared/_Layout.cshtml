@@ -11,6 +11,7 @@
   <title>dotNetflix - @controllerName</title>
   <link rel="stylesheet" href="/css/material-components-web.css">
   <link rel="stylesheet" href="/css/main.css">
+  @RenderSection("styles", required: false)
 </head>
 
 <body class="mdc-typography main-body">
@@ -39,7 +40,7 @@
               else{
                 <li><a href="/account/signin" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.124s;">Sign In</a></li>
               }
-              <li class="mdc-list-divider" role="separator"></li>
+              <!--<li class="mdc-list-divider" role="separator"></li>-->
             </ul>
           </div>
         </div>
@@ -98,7 +99,8 @@
     mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
     mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-list-item'));
   </script>
-  </div>
+
+  @RenderSection("scripts", required: false)
 </body>
 
 </html>

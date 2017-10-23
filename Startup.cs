@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using dotNetflix.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -26,11 +23,12 @@ namespace dotNetflix
 		{
 			services.AddMvc();
 			services.AddAuthentication("Cookies")
-			.AddCookie("Cookies", options => {
+			.AddCookie("Cookies", options =>
+			{
 				options.LoginPath = "/account/signin";
 				options.AccessDeniedPath = "/account/signin";
 				options.LogoutPath = "/account/Logout";
-			});
+            });
 
 			// claims transformation
 			services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
@@ -55,8 +53,8 @@ namespace dotNetflix
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
-									name: "default",
-									template: "{controller=Home}/{action=Index}/{id?}");
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
 		}
