@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotNetflix.Controllers
 {
@@ -21,38 +22,64 @@ namespace dotNetflix.Controllers
 			{
 				context.Database.EnsureCreated();
                 // get userid of logged in user
-                // var user = context.Users.Find(int.Parse(this.User.Claims.FirstOrDefault().Value));
                 int userid =int.Parse(this.User.Claims.FirstOrDefault().Value);
                 var comments = context.Comments.Where(c => c.User.Userid == userid).ToList();
 
+				var videos = context.Videos
+				.Where(v => v.User.Userid == userid)
+				.Include(v => v.Comments)
+				.ToList();
+				
                 ViewData["Comments"] = comments;
+				ViewData["Videos"] = videos;
                 return View();
 			}
-			// return RedirectToAction("Index", "Home");
+		}
+
+		[Authorize]
+		[HttpPost]
+		public IActionResult UpdateVideo([FromForm] int id, [FromForm] string name, [FromForm] int? delete){
+
+			using (var context = new DbSqlContext())
+			{
+				context.Database.EnsureCreated();
+				var video = context.Videos
+				.Include(v => v.Comments)
+				.Single(v => v.Videoid==id);
+
+				if (delete != null)
+				{
+					context.Remove(video);
+				}
+				else
+				{
+					video.Name = name;
+				}
+				context.SaveChanges();
+			}
+
+			return RedirectToAction("Index");
 		}
 
         [Authorize]
-        public IActionResult UpdateComment([FromForm] string userComment, [FromForm] int commentId)
+        public IActionResult UpdateComment([FromForm] string userComment, [FromForm] int commentId, [FromForm] int? delete)
         {
             using(var context = new DbSqlContext()){
                 context.Database.EnsureCreated();
 
                 var comment = context.Comments.Find(commentId);
-                comment.UserComment = userComment;
+
+				if (delete !=null)
+				{
+					context.Remove(comment);
+				}
+				else
+				{
+					comment.UserComment = userComment;	
+				}
                 context.SaveChanges();
             }
 
-            return RedirectToAction("Index");
-        }
-
-        [Authorize]
-        public IActionResult DeleteComment([FromBody] int commentId){
-            using(var context = new DbSqlContext()){
-                context.Database.EnsureCreated();
-                var comment = context.Comments.Find(commentId);
-                context.Remove(comment);
-                context.SaveChanges();
-            }
             return RedirectToAction("Index");
         }
 
@@ -60,6 +87,7 @@ namespace dotNetflix.Controllers
 		{
 			return View();
 		}
+
 
 		[HttpPost]
 		public async Task<IActionResult> Signin([FromForm] string username, [FromForm] string password, string returnUrl = null)
