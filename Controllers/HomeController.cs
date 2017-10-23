@@ -11,11 +11,17 @@ namespace dotNetflix.Controllers
 {
     public class HomeController : Controller
     {
+
+
+        /// <summary>
+        /// Home page of the application
+        /// Shows the top viewed videos and
+        /// the top commented video
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
-
-            using (var context = new DbSqlContext())
-            {
+            using (var context = new DbSqlContext()){
                 await context.Database.EnsureCreatedAsync();
                 
                 ViewData["TopViewVideos"] = await context.Videos
@@ -35,10 +41,10 @@ namespace dotNetflix.Controllers
         }
 
 
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        /// <summary>
+        /// Error page
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Error() { return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }); }
     }
 }

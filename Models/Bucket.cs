@@ -13,6 +13,10 @@ namespace dotNetflix.Models
 		private StorageClient _storage;
 		private string _bucketName;
 
+
+		/// <summary>
+		/// Creates an instance of bucket access
+		/// </summary>
 		public BucketAccess()
 		{
 			string path = "./COMP-306.json";
@@ -25,6 +29,14 @@ namespace dotNetflix.Models
 		}
 
 
+		/// <summary>
+		/// Uploads the a file to data storage
+		/// and returns a url for public access
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <param name="fileType"></param>
+		/// <param name="file"></param>
+		/// <returns></returns>
 		public async Task<string> UpdateFile(string fileName, string fileType, Stream file)
 		{
 

@@ -15,6 +15,12 @@ namespace dotNetflix.Controllers
 {
 	public class AccountController : Controller
 	{
+
+		/// <summary>
+		/// Show the logged in user there 
+		/// comments and uploaded videos
+		/// </summary>
+		/// <returns>IActionResult</returns>
         [Authorize]
 		public IActionResult Index()
 		{
@@ -36,6 +42,17 @@ namespace dotNetflix.Controllers
 			}
 		}
 
+
+		/// <summary>
+		/// Allows a use to update
+		/// the name of their uploaded video
+		/// or
+		/// delete a video that the user uploaded
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="name"></param>
+		/// <param name="delete"></param>
+		/// <returns>IActionResult</returns>
 		[Authorize]
 		[HttpPost]
 		public IActionResult UpdateVideo([FromForm] int id, [FromForm] string name, [FromForm] int? delete){
@@ -61,6 +78,17 @@ namespace dotNetflix.Controllers
 			return RedirectToAction("Index");
 		}
 
+
+		/// <summary>
+		/// Allows a use to update
+		/// the text of their comment
+		/// or
+		/// delete a comment that the user uploaded
+		/// </summary>
+		/// <param name="userComment"></param>
+		/// <param name="commentId"></param>
+		/// <param name="delete"></param>
+		/// <returns>IActionResult</returns>
         [Authorize]
         public IActionResult UpdateComment([FromForm] string userComment, [FromForm] int commentId, [FromForm] int? delete)
         {
@@ -83,12 +111,22 @@ namespace dotNetflix.Controllers
             return RedirectToAction("Index");
         }
 
-		public IActionResult Signin()
-		{
-			return View();
-		}
+
+		/// <summary>
+		/// Shows the sign in page
+		/// </summary>
+		/// <returns>IActionResult</returns>
+		public IActionResult Signin(){return View();}
 
 
+		/// <summary>
+		/// Signs in a user using username and password
+		/// If valid a cooke will be set 
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <param name="returnUrl"></param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> Signin([FromForm] string username, [FromForm] string password, string returnUrl = null)
 		{
@@ -136,6 +174,11 @@ namespace dotNetflix.Controllers
 			}
 		}
 
+
+		/// <summary>
+		/// logouts a user and redirects back to the home page
+		/// </summary>
+		/// <returns>IActionResult</returns>
         [Authorize]
 		public async Task<IActionResult> Logout()
 		{
@@ -143,15 +186,24 @@ namespace dotNetflix.Controllers
 			return Redirect("/");
 		}
 
-		public IActionResult Create()
-		{
-			return View();
-		}
 
+		/// <summary>
+		/// Shows the Create account page 
+		/// </summary>
+		/// <returns>IActionResult</returns>
+		public IActionResult Create(){ return View(); }
+
+
+		/// <summary>
+		/// Creates an account and saves a hash of the users password
+		/// </summary>
+		/// <param name="username"></param>
+		/// <param name="password"></param>
+		/// <param name="passwordverify"></param>
+		/// <returns>IActionResult</returns>
 		[HttpPost]
 		public IActionResult Create([FromForm] string username, [FromForm] string password, [FromForm] string passwordverify)
 		{
-			Console.WriteLine($"{username} {password} {passwordverify} {password.Equals(passwordverify)}");
 
 			if (username == null || password == null || passwordverify == null)
 			{

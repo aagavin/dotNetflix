@@ -14,6 +14,11 @@ namespace dotNetflix.Controllers
     [Authorize]
     public class VideoController : Controller
     {
+
+        /// <summary>
+        /// Shows all the videos
+        /// </summary>
+        /// <returns>IActionResult</returns>
         public IActionResult Index()
         {
             using(var context = new DbSqlContext()){
@@ -24,6 +29,13 @@ namespace dotNetflix.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Gets a video by id and
+        /// updates the view count
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult</returns>
         public IActionResult Id([FromRoute] int id){
             using (var context = new DbSqlContext())
             {
@@ -47,6 +59,13 @@ namespace dotNetflix.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Adds a new comment to the db
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <param name="videoId"></param>
+        /// <returns>IActionResult</returns>
         [HttpPost]
         public IActionResult AddComment([FromForm] string comment, [FromForm] int videoId){
 
