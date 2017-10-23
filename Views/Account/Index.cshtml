@@ -1,3 +1,24 @@
+@section styles
+{
+    <style>
+        .video-border{
+            box-shadow: 0px 0px 5px 0px #cfcfcf;
+            border-radius: .3em;
+            padding: 4em;
+            margin-bottom: 1em;
+        }
+        .video-stats{
+            padding: 0;
+            width: 1000%;
+            color: #666;
+        }
+        .video-stats a{
+            text-decoration-line: none;
+            color: #666;
+        }
+
+    </style>
+}
 <h1>Account Settings</h1>
 <div class="mdc-card">
     <section class="mdc-card__primary">
@@ -22,7 +43,7 @@
                                 <button type="submit" class="mdc-button"><i class="material-icons">save</i></button>
                             </div>
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-                                <button type="button" value="@comment.Commentid" class="deleteCmtBtn mdc-button"><i class="material-icons"><i class="material-icons">delete</i></button>
+                                <button type="submit" name="delete" value="@comment.Commentid" class="deleteCmtBtn mdc-button"><i class="material-icons">delete</i></button>
                             </div>
                         </div>
                         </div>
@@ -36,21 +57,60 @@
     </section>
 </div>
 
-    <script type="text/javascript">
-        var deleteButtons = document.getElementsByClassName("deleteCmtBtn");
 
-        for(var i =0; i< deleteButtons.length; i++){
-            deleteButtons[i].addEventListener('click', (event)=>{
-                alert(deleteButtons[i].getAttribute("value"));
-            });
-        }
+<div class="mdc-card">
+  <section class="mdc-card__primary">
+    <h1 class="mdc-card__title mdc-card__title--large">Your Videos</h1>
+    <h2 class="mdc-card__subtitle">Edit or delete your videos</h2>
+  </section>
+  <section class="mdc-card__supporting-text">
+    
+    <div class="mdc-layout-grid">
+        
+            @foreach(var video in @ViewData["Videos"] as IEnumerable<dotNetflix.Models.Video>)
+            {
+                <form method="POST" action="/account/UpdateVideo">
+                    <input type="hidden" value="@video.Videoid" name="id">
 
-        /** document.getElementById("deleteCmtBtn").addEventListener("click", (event)=>{
-            alert("you clicked me");
-        }); **/
-    </script>
+                    <div class="mdc-layout-grid__inner video-border">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10">
+                            <label class="mdc-textfield mdc-textfield--fullwidth video-title">
+                            <input type="text" name="name" value="@video.Name" class="mdc-textfield__input" required>
+                            <span class="mdc-textfield__label">Video Name</span>
+                            </label>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2">
+                            <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                                    <button type="submit" class="mdc-button"><i class="material-icons">save</i></button>
+                                </div>
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                                    <button type="submit" name="delete" value="@video.Videoid" class="deleteCmtBtn mdc-button"><i class="material-icons">delete</i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
 
-@*
+                        
+                        <div class="mdc-layout-grid video-stats">
+                            <div class="mdc-layout-grid__inner">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                                    <a href="/video/id/@video.Videoid">View Video</a>  | Comments: @video.Comments.Count | Views: @video.views
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        
+    </div>
+  </section>
+</div>
+
+
 @section scripts
 {
-*@
+    <script type="text/javascript">
+    </script>
+}
