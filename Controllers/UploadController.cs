@@ -15,12 +15,24 @@ namespace dotNetflix.Controllers
 	public class UploadController : Controller
 	{
 
+
+		/// <summary>
+		/// Shows the upload page 
+		/// </summary>
+		/// <returns>IActionResult</returns>
 		public IActionResult Index()
 		{
 			return View();
 		}
 
 
+		/// <summary>
+		/// Uploads the a move 
+		/// added video the db and google storage
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="file"></param>
+		/// <returns>IActionResult</returns>
 		[HttpPost]
 		public async Task<IActionResult> Index([FromForm] string name, [FromForm] IFormFile file)
 		{
@@ -28,19 +40,11 @@ namespace dotNetflix.Controllers
 
 			if (!file.ContentType.Equals("video/mp4"))
 			{
-				System.Console.WriteLine(file.ContentType);
 				ViewData["Message"] = "File not correct type mp4 files only";
 				return View();
 			}
 
-			foreach (var claim in User.Claims)
-			{
-				if (claim.Type.Equals("id"))
-				{
-					userId = int.Parse(claim.Value);
-					break;
-				}
-			}
+			userId = int.Parse(this.User.Claims.FirstOrDefault().Value);
 
 			BucketAccess bucket = new BucketAccess();
 			string url = await bucket.UpdateFile(file.FileName, file.ContentType, file.OpenReadStream());
@@ -62,10 +66,6 @@ namespace dotNetflix.Controllers
 
 			ViewData["Message"] = "File successfully uploaded upload another?";
 			return View();
-
-
-
-
 		}
 
 	}

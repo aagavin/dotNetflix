@@ -1,1 +1,66 @@
-﻿<h1>This is the index</h1>
+﻿<div class="mdc-card">
+  <section class="mdc-card__primary">
+    <h1 class="mdc-card__title mdc-card__title--large">Home Page</h1>
+  </section>
+</div>
+
+<div class="mdc-card">
+    <section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large">Most Viewed videos</h1>
+    </section>
+    <section class="mdc-card__supporting-text">
+        <div class="mdc-grid-list">
+            <ul class="mdc-grid-list__tiles">
+                @foreach(var video in ViewData["TopViewVideos"] as IEnumerable<dotNetflix.Models.Video>){
+                    <a href="/video/id/@video.Videoid">
+                    <li class="mdc-grid-tile">
+                        <div class="mdc-grid-tile__primary">
+                            <video src="@video.bucketurl" style="width:100%;margin-top:auto;margin-bottom:auto" >Your browser doesnt support HTML5 video</video>
+                        </div>
+                        <span class="mdc-grid-tile__secondary">
+                            <span class="mdc-grid-tile__title">
+                                @video.Name 
+                            </span>
+                        </span>
+                    </li>
+                    </a>
+                }
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+<div class="mdc-card">
+    <section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large">Most talked about videos</h1>
+    </section>
+    <section class="mdc-card__supporting-text">
+        <div class="mdc-grid-list">
+            <ul class="mdc-grid-list__tiles">
+                @foreach(var video in ViewData["topCommentVideo"] as IEnumerable<dotNetflix.Models.Video>){
+                    <a href="/video/id/@video.Videoid">
+                    <li class="mdc-grid-tile">
+                        <div class="mdc-grid-tile__primary">
+                            <video src="@video.bucketurl" style="width:100%;margin-top:auto;margin-bottom:auto" >Your browser doesnt support HTML5 video</video>
+                        </div>
+                        <span class="mdc-grid-tile__secondary">
+                            <span class="mdc-grid-tile__title">
+                                @video.Name 
+                            </span>
+                        </span>
+                    </li>
+                    </a>
+                }
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+<div class="mdc-card">
+    <section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large"><a href="/video">View all videos <i class="material-icons">arrow_forward</i></a></h1>
+    </section>
+</div>
+<br>

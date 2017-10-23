@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotNetflix.Models
 {
+
+	/// <summary>
+	/// User table
+	/// </summary>
 	public class User
 	{
 		[Key]
@@ -14,6 +18,10 @@ namespace dotNetflix.Models
 
 	}
 
+
+	/// <summary>
+	/// Video Table
+	/// </summary>
 	public class Video
 	{
 		[Key]
@@ -25,6 +33,9 @@ namespace dotNetflix.Models
 		public ICollection<Comment> Comments { get; set; }
 	}
 
+	/// <summary>
+	/// Comment table
+	/// </summary>
 	public class Comment
 	{
 		[Key]
